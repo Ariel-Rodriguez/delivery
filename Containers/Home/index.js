@@ -9,7 +9,7 @@ function Home({ restaurantList }) {
       <DeliveryHeader />
       <div>
         list of restaurants
-        {restaurantList.map(restaurant => (<h1>{restaurant.title}</h1>) )}
+        {restaurantList.map(restaurant => (<h1>{restaurant.general.name}</h1>) )}
       </div>
     </Fragment>
   )

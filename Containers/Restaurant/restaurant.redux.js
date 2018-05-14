@@ -3,7 +3,7 @@ import { createReducer, createActions } from 'reduxsauce'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  restaurantFetch: null,
+  restaurantFetch: ['id'],
   restaurantFetchSuccess: ['restaurant'],
 })
 

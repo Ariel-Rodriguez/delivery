@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import rootReducer from './reducers'
 import rootSaga from './sagas'
 import { createApi } from './api'
+import { API_URL } from '../configs/app'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -21,9 +22,13 @@ export function configureStore (initialState = {}) {
     bindMiddleware([sagaMiddleware])
   )
 
-  const api = createApi({
-    dev: process.env.NODE_ENV !== 'production'
-  })
+  let api
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('Using API fixture.')
+    api = require('../fixtures/api').default
+  } else {
+    api = createApi({ baseURL: API_URL })
+  }
 
   store.sagaTask = sagaMiddleware.run(rootSaga, api)
 
