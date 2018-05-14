@@ -1,26 +1,18 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {increment, loadData, startClock, tickClock} from '../actions'
-import Page from '../components/page'
+import { connect } from 'react-redux';
+import Home from '../Containers/Home'
+import HomeActions from '../Containers/Home/home.redux'
 
-class Counter extends React.Component {
-  static async getInitialProps (props) {
-    const { store } = props.ctx
-    store.dispatch(tickClock(props.isServer))
-    store.dispatch(increment())
-
-    if (!store.getState().placeholderData) {
-      store.dispatch(loadData())
-    }
-  }
-
-  componentDidMount () {
-    this.props.dispatch(startClock())
-  }
-
+class PageIndex extends React.Component {
   render () {
-    return <Page title='Index Page' linkTo='/other' />
+    return (<Home />)
+  }
+
+  static async getInitialProps({ ctx: { store } }) {
+    if (!store.getState().home.restaurantList.length) {
+      store.dispatch(HomeActions.homeRestaurantListFetch())
+    }
   }
 }
 
-export default connect()(Counter)
+export default connect()(PageIndex)
