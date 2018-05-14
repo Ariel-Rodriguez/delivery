@@ -3,13 +3,19 @@ import { connect } from 'react-redux'
 import DeliveryHeader from '../../Components/DeliveryHeader'
 
 
-function Home({ restaurantList }) {
+function Home({ restaurantList, Link }) {
   return (
     <Fragment>
       <DeliveryHeader />
       <div>
         list of restaurants
-        {restaurantList.map(restaurant => (<h1>{restaurant.general.name}</h1>) )}
+        {restaurantList.map(restaurant => (
+          <div>
+            <Link href={restaurant.id} name={restaurant.general.name}>
+              <h1>{restaurant.general.name}</h1>
+            </Link>
+          </div>
+        ))}
       </div>
     </Fragment>
   )

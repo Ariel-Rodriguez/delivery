@@ -5,13 +5,13 @@ import RestaurantActions from '../Containers/Restaurant/restaurant.redux'
 
 class RestaurantPage extends React.Component {
   render() {
-    return (<Restaurant />)
+    return (<Restaurant id={this.props.id} />)
   }
 
-  static async getInitialProps({ query, ctx: { store } }) {
+  static async getInitialProps({ ctx: { query, store } }) {
     const { id } = query
-    console.log(`Restaurant id ${id}`)
     store.dispatch(RestaurantActions.restaurantFetch(id))
+    return { id }
   }
 }
 

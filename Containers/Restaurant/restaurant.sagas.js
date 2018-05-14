@@ -1,14 +1,14 @@
-import { all, put , takeLatest } from 'redux-saga/effects'
-import RestaurantActions, { RestaurantTypes  } from './restaurant.redux';
+import { all, put, call, takeLatest } from 'redux-saga/effects'
+import RestaurantActions, { RestaurantTypes } from './restaurant.redux'
 
-function * fetchRestaurant(api) {
-  const restaurant = { rating: 1 }
-  yield put(RestaurantActions.restaurantSuccess(restaurant))
+function* fetchRestaurant(api, { id }) {
+  const restaurant = yield call(api.fetchRestaurant, id)
+  yield put(RestaurantActions.restaurantFetchSuccess(restaurant))
 }
 
-function * rootRestaurant(api) {
+function* rootRestaurant(api) {
   yield all([
-    takeLatest(RestaurantTypes.RESTAURANT_FETCH, fetchRestaurant, api)
+    takeLatest(RestaurantTypes.RESTAURANT_FETCH, fetchRestaurant, api),
   ])
 }
 

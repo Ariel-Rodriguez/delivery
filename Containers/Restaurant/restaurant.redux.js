@@ -15,7 +15,7 @@ export default Creators
 const INITIAL_STATE = {
   isLoading: false,
   id: '',
-  rating: ''
+  rating: '',
 }
 
 /* ------------- Reducers ------------- */

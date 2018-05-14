@@ -4,15 +4,25 @@ import Link from 'next/link'
 import Home from '../Containers/Home'
 import HomeActions from '../Containers/Home/home.redux'
 
+
 class PageIndex extends React.Component {
-  render () {
-    return (<Home createRestaurantLink={this.createRestaurantLink}/>)
+  render() {
+    return (<Home Link={PageIndex.restaurantLink} />)
   }
 
-  createRestaurantLink({ id, children}) {
-    <Link href={`/restaurant?id=${id}`} as={`/restaurant/${id}`}>
-     {children}
-    </Link>
+  static restaurantLink({ href, children }) {
+    const props = {
+      href: {
+        pathname: '/restaurant',
+        query: { id: href },
+      },
+      as: {
+        pathname: `/restaurant/${href}`,
+      },
+    }
+    return (
+      <Link {...props}>{children}</Link>
+    )
   }
 
   static async getInitialProps({ ctx: { store } }) {

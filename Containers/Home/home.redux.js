@@ -15,7 +15,7 @@ export default Creators
 const INITIAL_STATE = {
   isLoading: false,
   restaurantList: [],
-  pagination: {}
+  pagination: {},
 }
 
 /* ------------- Reducers ------------- */
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
 const restaurantListSuccess = (state, { page }) => ({
   isLoading: false,
   restaurantList: state.restaurantList.concat(page.data),
-  pagination: page.pagination
+  pagination: page.pagination,
 })
 
 /* ------------- Hookup Reducers To Types ------------- */
