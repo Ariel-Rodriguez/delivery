@@ -10,8 +10,9 @@ const handle = app.getRequestHandler()
 const route = pathMatch()
 const match = route('/restaurant/:id')
 
+
 app.prepare()
-  .then(() => {
+  .then(async () => {
     createServer((req, res) => {
       const { pathname } = parse(req.url)
       const params = match(pathname)

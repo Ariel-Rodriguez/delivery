@@ -2,6 +2,7 @@
 
 import { reducer as restaurant } from './Restaurant/restaurant.redux'
 import { reducer as home } from './Home/home.redux'
+import { reducer as main } from './Main/main.redux'
 
 /*
   I like this pattern, easy to add / remove  containers to sagas and store. And very easy to track its dependency ijection.
@@ -11,9 +12,11 @@ import { reducer as home } from './Home/home.redux'
 
 import restaurantSagas from './Restaurant/restaurant.sagas'
 import homeSagas from './Home/home.sagas'
+import mainSagas from './Main/main.sagas'
 
 // This will define the keys for root store
 export const reducers = {
+  main,
   restaurant,
   home,
 }
@@ -21,4 +24,5 @@ export const reducers = {
 export const sagas = [
   restaurantSagas,
   homeSagas,
+  mainSagas,
 ]

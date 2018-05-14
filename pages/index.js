@@ -26,10 +26,11 @@ class PageIndex extends React.Component {
   }
 
   static async getInitialProps({ ctx: { store } }) {
-    if (!store.getState().home.restaurantList.length) {
+    const state = store.getState()
+    if (!state.home.restaurantList.length) {
       store.dispatch(HomeActions.homeRestaurantListFetch())
     }
   }
 }
 
-export default connect()(PageIndex)
+export default PageIndex

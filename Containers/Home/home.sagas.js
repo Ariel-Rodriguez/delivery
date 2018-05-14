@@ -2,8 +2,18 @@ import { all, put, call, takeLatest } from 'redux-saga/effects'
 import HomeActions, { HomeTypes } from './home.redux'
 
 function* fetchRestaurantList(api) {
-  const list = yield call(api.fetchRestaurantList)
-  yield put(HomeActions.homeRestaurantListSuccess(list))
+  try {
+    const { data, ok, status } = yield call(api.fetchRestaurantList)
+    if (ok) {
+      yield put(HomeActions.homeRestaurantListSuccess(data))
+    } else {
+      console.log(status)
+      yield put(HomeActions.homeRestaurantListError(status))
+    }
+  } catch (e) {
+    console.log(e)
+    yield put(HomeActions.homeRestaurantListError(e))
+  }
 }
 
 function* rootHome(api) {
