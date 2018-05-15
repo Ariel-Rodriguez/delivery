@@ -4,7 +4,7 @@ import Header from '../../Components/Header'
 import RestaurantList from '../../Components/RestaurantList'
 import RestaurantCard from '../../Components/RestaurantCard'
 
-import HomeActions from './home.redux'
+import HomeActions, { getRestaurantList } from './home.redux'
 import { getRestaurantCardInformation } from '../Restaurant/restaurant.redux'
 
 class Home extends Component {
@@ -36,17 +36,19 @@ class Home extends Component {
 }
 
 function mapStateToProps({ home }) {
-  return home
+  return {
+    ...home,
+    restaurantList: getRestaurantList(home),
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     selectFilter(filter) {
-      console.log('asdasd filter')
-      dispatch(HomeActions.restaurantListChangeFilter(filter))
+      dispatch(HomeActions.homeRestaurantListChangeFiltering({ filterBy: filter }))
     },
     selectSort(sort) {
-      dispatch(HomeActions.restaurantListChangeSort(sort))
+      dispatch(HomeActions.homeRestaurantListChangeFiltering({ sortBy: sort.value }))
     },
   }
 }

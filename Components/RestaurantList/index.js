@@ -9,15 +9,15 @@ import {
 
 
 const RestaurantList = ({
-  renderItem, restaurantList, selectFilter, selectSort, filterValues, sortValues, sortSelected, filterSelected,
+  renderItem, restaurantList, selectFilter, selectSort, filters, sorts, sortingBy, filteringBy,
 }) => (
   <Container>
     <Helpers>
       <Helpers.Filters>
-        <SelectBox placeholder="Filter" value={filterSelected} options={filterValues} name="Filter" onChange={selectFilter} multi />
+        <SelectBox placeholder="Filter" value={filteringBy} options={filters} name="Filter" onChange={selectFilter} isMulti multi />
       </Helpers.Filters>
       <Helpers.Sort>
-        <SelectBox placeholder="Sort" value={sortSelected} options={sortValues} name="Sort" onChange={selectSort} />
+        <SelectBox placeholder="Sort" value={sortingBy} options={sorts} name="Sort" onChange={selectSort} />
       </Helpers.Sort>
     </Helpers>
     <List>
