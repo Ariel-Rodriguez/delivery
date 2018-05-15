@@ -33,7 +33,7 @@ function createFiltersFromRestaurantList(state, list) {
 
 // todo memoize this
 const comparatorComposedSlugInString = (list, slugString) =>
-  slugString.split(',').some(slug => list.some(fiterList => fiterList.value === slug))
+  slugString.split(',').some(slug => list.some(filterSlug => filterSlug === slug))
 
 
 /**

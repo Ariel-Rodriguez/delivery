@@ -1,7 +1,8 @@
 import { createReducer, createActions } from 'reduxsauce'
 import { createSelector } from 'reselect'
-import { uniqBy, sortBy } from 'lodash'
+import { isEqual, uniqBy, get, sortBy } from 'lodash'
 import { makeDeepFilterBySlugList, createFiltersFromRestaurantList } from './filtering'
+
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -42,11 +43,11 @@ const restaurantListSuccess = (state, { page }) => ({
   filters: createFiltersFromRestaurantList(state, page.data),
 })
 
-const restaurantListChangeFiltering = (state, { filtering: { sortBy: sorting, filterBy } }) => ({
+const restaurantListChangeFiltering = (state, { filtering }) => ({
   ...state,
   filtering: {
-    sortBy: sorting || state.filtering.sortBy,
-    filterBy: filterBy || state.filtering.filterBy,
+    sortBy: get(filtering, 'sortBy', state.filtering.sortBy),
+    filterBy: get(filtering, 'filterBy', state.filtering.filterBy),
   },
 })
 
@@ -60,7 +61,10 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 /* ------------- selectors ------------- */
 
-const getRestaurantListFiltered = state =>
+export const filteringDidChange =(prevFiltering, filtering) =>
+  prevFiltering.sortBy !== filtering.sortBy || !isEqual(prevFiltering.filterBy, filtering.filterBy)
+
+export const getRestaurantListFiltered = state =>
   makeDeepFilterBySlugList('general.categories', state.filtering.filterBy)
 
 export const getRestaurantList = createSelector(

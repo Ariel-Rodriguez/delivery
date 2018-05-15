@@ -1,15 +1,26 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import Router from 'next/router'
+
 import Header from '../../Components/Header'
 import RestaurantList from '../../Components/RestaurantList'
 import RestaurantCard from '../../Components/RestaurantCard'
 
-import HomeActions, { getRestaurantList } from './home.redux'
+import HomeActions, { getRestaurantList, filteringDidChange } from './home.redux'
 import { getRestaurantCardInformation } from '../Restaurant/restaurant.redux'
 
-// THIS IS NOT GOOD CONTAINER, IT COULD BE OPTIMIZED TO A VIRTUALIZED LIST
-
 class Home extends Component {
+  
+  componentDidUpdate(prevProps) {
+    const { sortBy, filterBy } = this.props.filtering
+    // update uri with query filters
+    if (filteringDidChange(prevProps, this.props.filtering)) {
+      const href = `/?sortBy=${sortBy}&filterBy=${filterBy.join(',')}`
+      const as = href
+      Router.push(href, as, { shallow: true })
+    }
+  }
+
   render() {
     return (
       <Fragment>
@@ -42,12 +53,14 @@ function mapStateToProps({ home }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectFilter(filter) {
-      dispatch(HomeActions.homeRestaurantListChangeFiltering({ filterBy: filter }))
+    selectFilter(filters) {
+      const filterBy = filters.map(f => f.value)
+      dispatch(HomeActions.homeRestaurantListChangeFiltering({ filterBy }))
     },
-    selectSort(sort) {
-      dispatch(HomeActions.homeRestaurantListChangeFiltering({ sortBy: sort.value }))
-    },
+    selectSort(sorting) {
+      const sortBy = sorting.value
+      dispatch(HomeActions.homeRestaurantListChangeFiltering({ sortBy }))
+    }
   }
 }
 

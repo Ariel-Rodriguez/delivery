@@ -1,16 +1,21 @@
 # Delivery test
-- Live demo https://delivery-lwkhsiyvmc.now.sh/
+- Live demo https://delivery-qrzlkjrygc.now.sh
 
 
 # Install it and run:
 
+## Production mode
+```bash
+yarn
+yarn build
+yarn start
+```
+
+## Dev using mocked API
 ```bash
 yarn
 yarn dev
 ```
 
-Deploy it to the cloud with [now](https://zeit.co/now) ([download](https://zeit.co/download))
 
-```bash
-now
-```
+This example and documentation is based on the [with-redux](https://github.com/zeit/next.js/tree/master/examples/with-redux) example.
