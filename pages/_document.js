@@ -15,6 +15,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
+          <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
           <title>Delivery hero</title>
           {this.props.styleTags}
         </Head>

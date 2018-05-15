@@ -1,4 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
+import { createSelector } from 'reselect'
+import { uniqBy } from 'lodash'
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -22,7 +24,7 @@ const INITIAL_STATE = {
 
 const restaurantListSuccess = (state, { page }) => ({
   isLoading: false,
-  restaurantList: state.restaurantList.concat(page.data),
+  restaurantList: uniqBy(state.restaurantList.concat(page.data), 'id'),
   pagination: page.pagination,
 })
 
@@ -34,3 +36,4 @@ export const reducer = createReducer(INITIAL_STATE, {
 })
 
 /* ------------- selectors ------------- */
+

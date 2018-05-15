@@ -1,16 +1,31 @@
 
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
+import RestaurantMenu from '../../Components/RestaurantMenu'
+import { getRestaurantCardInformation } from './restaurant.redux'
+import ActivityLoading from '../../Components/ActivityLoading'
 
-function Restaurant({ id }) {
+function Restaurant({ buy, restaurant }) {
+  if (restaurant.isLoading) return (<ActivityLoading />)
+
   return (
-    <Fragment>
-      <h1>{id}</h1>
-    </Fragment>
+    <RestaurantMenu
+      card={getRestaurantCardInformation(restaurant)}
+      sections={restaurant.sections}
+      onBuy={buy}
+    />
   )
 }
 
-const mapStateToProps = ({ restaurant }) => restaurant
+function mapDispatchToProps() {
+  return {
+    buy(id) {
+      console.log(`Buy item: ${id}`)
+    },
+  }
+}
 
-export default connect(mapStateToProps)(Restaurant)
+const mapStateToProps = ({ restaurant }) => ({ restaurant })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Restaurant)

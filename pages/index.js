@@ -21,7 +21,9 @@ class PageIndex extends React.Component {
       },
     }
     return (
-      <Link {...props}>{children}</Link>
+      <Link {...props}>
+        <span>{children}</span>
+      </Link>
     )
   }
 

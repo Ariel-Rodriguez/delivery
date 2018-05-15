@@ -1,8 +1,10 @@
+import helpers from '../../helpers'
+
 let token = ''
 
 function fakeApi(data) {
   return new Promise(r => {
-    setTimeout(() => r(data), 500)
+    setTimeout(() => r(helpers.objectToCamelCase(data)), 500)
   })
 }
 

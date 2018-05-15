@@ -2,8 +2,11 @@ import App, { Container } from 'next/app'
 import React from 'react'
 import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
-import createStore from '../redux/store'
 import withReduxSaga from 'next-redux-saga'
+import { ThemeProvider } from 'styled-components'
+
+import createStore from '../redux/store'
+import theme from '../Theme'
 import Main from '../Components/Main'
 import MainActions from '../Containers/Main/main.redux'
 
@@ -35,9 +38,11 @@ class Delivery extends App {
     return (
       <Container>
         <Provider store={store}>
-          <Main>
-            <Component {...pageProps} />
-          </Main>
+          <ThemeProvider theme={theme}>
+            <Main>
+              <Component {...pageProps} />
+            </Main>
+          </ThemeProvider>
         </Provider>
       </Container>
     )

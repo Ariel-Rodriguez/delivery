@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import DeliveryHeader from '../../Components/DeliveryHeader'
+import Header from '../../Components/Header'
+import RestaurantList from '../../Components/RestaurantList'
+import RestaurantCard from '../../Components/RestaurantCard'
 
+import HomeActions from './home.redux'
+import { getRestaurantCardInformation } from '../Restaurant/restaurant.redux'
 
 class Home extends Component {
   state = {
@@ -9,25 +13,42 @@ class Home extends Component {
   }
 
   render() {
-    const { restaurantList, Link } = this.props
     return (
       <Fragment>
-        <DeliveryHeader />
-        <div>
-          list of restaurants
-          {restaurantList.map(restaurant => (
-            <div key={restaurant.id}>
-              <Link href={restaurant.id} name={restaurant.general.name}>
-                <h1>{restaurant.general.name}</h1>
-              </Link>
-            </div>
-          ))}
-        </div>
+        <Header />
+        <RestaurantList
+          {...this.props}
+          renderItem={this.renderRestaurantCard}
+        />
       </Fragment>
+    )
+  }
+
+  renderRestaurantCard = restaurant => {
+    const { Link } = this.props
+    const cardInformation = getRestaurantCardInformation({ ...restaurant, info: restaurant.general })
+    return (
+      <Link prefetch href={restaurant.id} name={cardInformation.name}>
+        <RestaurantCard {...cardInformation} />
+      </Link>
     )
   }
 }
 
-const mapStateToProps = ({ home }) => home
+function mapStateToProps({ home }) {
+  return home
+}
 
-export default connect(mapStateToProps)(Home)
+function mapDispatchToProps(dispatch) {
+  return {
+    selectFilter(filter) {
+      console.log('asdasd filter')
+      dispatch(HomeActions.restaurantListChangeFilter(filter))
+    },
+    selectSort(sort) {
+      dispatch(HomeActions.restaurantListChangeSort(sort))
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

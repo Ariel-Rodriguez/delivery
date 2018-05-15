@@ -1,4 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
+import { createSelector } from 'reselect'
+
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -15,8 +17,12 @@ export default Creators
 const INITIAL_STATE = {
   isLoading: false,
   id: '',
-  rating: '',
+  address: { streetName: '', streetNumber: '' },
+  info: { name: '', categories: '', logoUri: '' },
+  rating: { average: '' },
+  sections: [],
 }
+
 
 /* ------------- Reducers ------------- */
 
@@ -33,3 +39,13 @@ export const reducer = createReducer(INITIAL_STATE, {
 })
 
 /* ------------- selectors ------------- */
+
+export const getRestaurantCardInformation = ({
+  address: {
+    streetName, streetNumber, city, zipcode,
+  },
+  info: { name, categories, logoUri },
+  rating: { average },
+}) => ({
+  average, categories, city, logoUri, name, streetName, streetNumber, zipcode,
+})
