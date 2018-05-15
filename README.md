@@ -1,5 +1,5 @@
 # Delivery test
-- Live demo https://delivery-qrzlkjrygc.now.sh
+- Live demo delivery-test-redux-1-0.now.sh
 
 
 # Install it and run:
