@@ -16,7 +16,7 @@ const RestaurantMenu = ({
     <Sections>
       {sections.map(section => (
         <Sections.Panel key={section.id}>
-          <Section {...section} />
+          <Section onClick={onBuy} {...section} />
         </Sections.Panel>
       ))}
     </Sections>

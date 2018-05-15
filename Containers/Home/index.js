@@ -7,11 +7,9 @@ import RestaurantCard from '../../Components/RestaurantCard'
 import HomeActions, { getRestaurantList } from './home.redux'
 import { getRestaurantCardInformation } from '../Restaurant/restaurant.redux'
 
-class Home extends Component {
-  state = {
-    page: 1,
-  }
+// THIS IS NOT GOOD CONTAINER, IT COULD BE OPTIMIZED TO A VIRTUALIZED LIST
 
+class Home extends Component {
   render() {
     return (
       <Fragment>

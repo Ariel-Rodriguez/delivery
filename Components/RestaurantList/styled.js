@@ -23,6 +23,7 @@ const List = styled.div`
 List.Item = styled.div`
   border: 1px solid transparent;
   box-shadow: 0 1px 1px 0 rgba(42,42,42,.4);
+  cursor: pointer;
 `
 
 export {

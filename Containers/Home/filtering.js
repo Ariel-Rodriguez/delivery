@@ -3,6 +3,7 @@
  */
 import { groupBy, uniq, get, flatten, unionBy } from 'lodash'
 
+// TODO: REFACTOR TO BETTER READABILITY AND ADD MEMOIZATION
 
 // returns an array which contains unique categories for given restaurant
 function extractCategoryTagsFromRestaurant(restaurant) {

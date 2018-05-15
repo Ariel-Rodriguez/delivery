@@ -3,7 +3,7 @@ import { injectGlobal } from 'styled-components'
 
 const globals = injectGlobal`
   * {
-    font-family: GrotesqueBlack,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
     box-sizing: border-box;
   }
   body {
@@ -24,6 +24,12 @@ const globals = injectGlobal`
   h1, h2, h3, h4, h5, h6, p {
     margin: 0;
     padding: 0;
+  }
+  article {
+    margin: 20px;
+  }
+  article p {
+    margin: 10px 0;
   }
   button {
     align-items: center;

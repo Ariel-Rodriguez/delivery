@@ -6,7 +6,7 @@ import {
 } from './styled'
 
 
-const RestaurantMenu = ({
+const Section = ({
   id,
   name,
   items,
@@ -26,9 +26,9 @@ const RestaurantMenu = ({
   </SectionPanel>
 )
 
-RestaurantMenu.defaultProps = {
+Section.defaultProps = {
   items: [],
   onClick() {},
 }
 
-export default RestaurantMenu
+export default Section
